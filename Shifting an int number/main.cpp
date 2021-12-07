@@ -1,13 +1,17 @@
 #include <bits/stdc++.h>
 using namespace std;
 /*
-                                       _     _           _
-                                      ( )   (_ )        ( )
-  ___    __     ___    _     ___     _| |    | |    _ _ | |_
-/',__) /'__`\ /'___) /'_`\ /' _ `\ /'_` |    | |  /'_` )| '_`\
-\__, \(  ___/( (___ ( (_) )| ( ) |( (_| |    | | ( (_| || |_) )
-(____/`\____)`\____)`\___/'(_) (_)`\__,_)   (___)`\__,_)(_,__/'
-
+      ___           ___                       ___           ___                    ___           ___           ___                                ___           ___
+     /\  \         /\__\          ___        /\  \         /\  \                  /\  \         /\__\         /\  \                   ___        /\__\         /\  \
+    /::\  \       /:/  /         /\  \      /::\  \        \:\  \                 \:\  \       /:/  /        /::\  \                 /\  \      /::|  |        \:\  \
+   /:/\ \  \     /:/__/          \:\  \    /:/\:\  \        \:\  \                 \:\  \     /:/__/        /:/\:\  \                \:\  \    /:|:|  |         \:\  \
+  _\:\~\ \  \   /::\  \ ___      /::\__\  /::\~\:\  \       /::\  \                /::\  \   /::\  \ ___   /::\~\:\  \               /::\__\  /:/|:|  |__       /::\  \
+ /\ \:\ \ \__\ /:/\:\  /\__\  __/:/\/__/ /:/\:\ \:\__\     /:/\:\__\              /:/\:\__\ /:/\:\  /\__\ /:/\:\ \:\__\           __/:/\/__/ /:/ |:| /\__\     /:/\:\__\
+ \:\ \:\ \/__/ \/__\:\/:/  / /\/:/  /    \/__\:\ \/__/    /:/  \/__/             /:/  \/__/ \/__\:\/:/  / \:\~\:\ \/__/          /\/:/  /    \/__|:|/:/  /    /:/  \/__/
+  \:\ \:\__\        \::/  /  \::/__/          \:\__\     /:/  /                 /:/  /           \::/  /   \:\ \:\__\            \::/__/         |:/:/  /    /:/  /
+   \:\/:/  /        /:/  /    \:\__\           \/__/     \/__/                  \/__/            /:/  /     \:\ \/__/             \:\__\         |::/  /     \/__/
+    \::/  /        /:/  /      \/__/                                                            /:/  /       \:\__\                \/__/         /:/  /
+     \/__/         \/__/                                                                        \/__/         \/__/                              \/__/
 */
 
 class matrix{
@@ -21,7 +25,7 @@ public:
     matrix(int number)
     {
 
-        //Here we are calculating the length of the input
+        // Calculating the length of the input
         int num = number;
         if (num > 0)
         {
@@ -29,7 +33,7 @@ public:
                 num/=10;
         }
 
-        //Moving the input from a whole int to a matrix
+        // Moving the input from the int into the matrix
         arr = new int*[n];
         for (int i = n-1; i>=0; i--)
         {
@@ -69,12 +73,9 @@ public:
     //Destructor
     ~matrix()
     {
-        //Here we are deleting the first array
         for(int i=0; i<n; i++)
             delete[] arr[i];
-        //over here we have deleted the second array
         delete[] arr;
-        //and here we are pointing our main array to NULL
         arr=NULL;
     }
 };
@@ -82,7 +83,7 @@ public:
 int main()
 {
     int value;
-    cout<<"Enter the value as an int please"<<endl;
+    cout<<"Enter a value as an int please"<<endl;
     cin >> value;
 
     matrix test(value);
