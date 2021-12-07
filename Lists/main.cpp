@@ -5,7 +5,6 @@
 
 using namespace std;
 
-// I have made a struct called Products
 struct Product {
     // Name of the Product
 	string name;
@@ -14,24 +13,24 @@ struct Product {
 	// Year of production
 	int year;
 };
-// I have made a struct called node, each node is made up from Data and pointer
+
 struct node {
-    // Here we have the data
+
 	Product data;
-	// and here we have the pointer that points out to the next node
+
 	node *next;
 };
 // All the functions are written inside this class
 class List {
-    // First node Pointer
+
 	node *head;
-	// last node Pointer
+
 	node *tail;
-	// Temporary pointer that can be used whenever we want
+
 	node *temp;
-	// A counter to count how many nodes are in the list
+
 	int nodeNum = 0;
-	// This function check if the list is empty or not
+
 	bool isEmpty()
 	{
 		return head == NULL;
@@ -46,35 +45,24 @@ public:
 	// This function is adding the product at the first of the list
 	void addAtFirst(Product p)
 	{
-	    // initializing
+
 		temp = new node;
-		// adding the data
 		temp->data = p;
-		// checking if the list is empty
 		if (isEmpty())
 		{
-		    // pointing to NULL
 			temp->next = NULL;
-			// our node is the last node in the list
 			tail = temp;
 		}
 		else
-            // if the list is not empty, then we point out to the head
 			temp->next = head;
-        // our node is the first node in the list
 		head = temp;
 		nodeNum++;
 	}
-    // This function is adding the product at the last of the list
 	void addAtLast(Product p)
 	{
-	    // initializing
 		temp = new node;
-		// adding the data
 		temp->data = p;
-		// // initializing the next pointer
 		temp->next = NULL;
-		// checking if it's empty or not
 		if (isEmpty())
 		{
 			head = temp;
@@ -85,18 +73,15 @@ public:
 			tail->next = temp;
 			tail = temp;
 		}
-		// increasing the amounts of the nodes
 		nodeNum++;
 	}
-    // This function is adding the product before a given name
+    // I'm using add before using only 2 pointers :D  "more efficient for memory"
 	void addBefore(Product p, Product pos)
 	{
-	    // checking if the list is empty
 		if (isEmpty())
 		{
 			cout << "Logic error, the list is empty, please add some nodes before using this function"<<endl;
 		}
-		// if we have only one node, then we can use add at first function
 		else if (nodeNum == 1)
 		{
 			addAtFirst(p);
@@ -108,20 +93,17 @@ public:
             node *after;
             prev = head;
             after = head->next;
-            // here we are saying if we want to add before the first node, we will use addAtFirst function so we won't get a "logic error"
 		    if(prev->data.name==pos.name)
 		    {
 		        addAtFirst(p);
 		    }
             else
             {
-                // searching for the required node
                 while (after->next != NULL && after->data.name != pos.name)
                 {
                     prev = after;
                     after = after->next;
                 }
-                // if we found the node, we will add our node before of it
                 if (after->data.name == pos.name)
                 {
                     temp = new node;
@@ -131,7 +113,6 @@ public:
 
                     nodeNum++;
                 }
-                // rather that, we will show an error that we didn't find that product
                 else
                 {
                     cout << "Error, couldn't find the desired position to insert the product!"<<endl;
@@ -140,15 +121,12 @@ public:
 
 		}
 	}
-    // This function is adding the product after a given name
 	void addAfter(Product p, Product pos)
 	{
-	    // checking if it's empty or not
 		if (isEmpty())
 		{
 			cout << "Logic error, the list is empty, please add some nodes before using this function";
 		}
-		// if there is only one node, we can use add at last function
 		else if (nodeNum == 1)
 		{
 			addAtLast(p);
@@ -156,15 +134,12 @@ public:
 		else
 		{
 
-            // initializing
 			node *prev = new node;
 			prev = head;
-            // searching for the required node
 			while (prev->next != NULL && prev->data.name != pos.name)
 			{
 				prev = prev->next;
 			}
-            // if we found the node, we will add our node after of it
 			if (prev->data.name == pos.name)
 			{
 			    temp = new node;
@@ -173,26 +148,21 @@ public:
 			    prev->next=temp;
 				nodeNum++;
 			}
-            // rather that, we will show an error that we didn't find that product
 			else
 			{
 				cout << "Error, couldn't find the desired position to insert the product!\n";
 			}
 		}
 	}
-    // This function is removing a specific product
 	void removeNode(Product p)
 	{
-	    // initializing
 		temp = head;
 		node *prev;
-        // searching for the required node
 		while (temp->next != NULL && temp->data.name != p.name)
 		{
 			prev = temp;
 			temp = temp->next;
 		}
-		// if we found the node, we will delete it
 		if (temp->data.name == p.name)
 		{
 			if (nodeNum > 1)
@@ -211,6 +181,7 @@ public:
 			cout << "couldn't find the desired node to delete";
 		}
 	}
+
     // This function is for printing the list
 	void display()
 	{
@@ -224,7 +195,6 @@ public:
 				cout <<"   ";
 			}
 			cout << endl<<endl;
-			//show the number of the nodes
 			cout << "The shop has: "<< nodeNum <<" Products"<<endl<<endl;
 		}
 		else
