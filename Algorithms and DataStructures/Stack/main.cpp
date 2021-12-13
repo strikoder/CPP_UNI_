@@ -43,20 +43,17 @@ public:
             cout<<"Stack overflow, you can't fill the stack anymore\n";
     }
 
-    int pop()
+    void pop()
     {
         if(!isEmpty())
         {
             cout<<"The deleted value is: "<<arr[top]<<endl;
-            int popValue= arr[top];
             arr[top]=0;
             top--;
-            return popValue;
         }
         else
         {
             cout<<"Stack underflow, you can't delete a value from an empty stack\n";
-            return 0;
         }
     }
 
@@ -101,6 +98,7 @@ public:
         delete [] arr;
     }
 };
+
 
 int main()
 {
