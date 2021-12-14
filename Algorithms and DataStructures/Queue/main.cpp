@@ -59,9 +59,9 @@ public:
         }
         else
         {
-            x=arr[frontQ];
-            arr[frontQ]=0;
-            frontQ++;
+            x=arr[rearQ];
+            arr[rearQ]=0;
+            rearQ--;
             return x;
         }
     }
@@ -84,7 +84,7 @@ public:
 
 int main()
 {
-    int option,value;
+    int option,value,x;
     Queue q;
     cout<<"Welcome to our Queue program.\n"<<"Which operation do you want to use? select option number please, or enter 0 to quit\n";
     do
@@ -109,7 +109,8 @@ int main()
                 q.enqueue(value);
                 break;
             case 2:
-                q.dequeue()==0?cout<<"Sorry the stack is empty, you can't do anything\n":cout<<"The dequeued value is : "<<q.dequeue()<<endl;
+                x=q.dequeue();
+                x==0?cout<<"Sorry the stack is empty, you can't do anything\n":cout<<"The dequeued value is : "<<x<<endl;
                 break;
             case 3:
                 q.isEmpty()?cout<<"The Queue is Empty, gl next time\n":cout<<"The Queue is not empty, lel\n";
