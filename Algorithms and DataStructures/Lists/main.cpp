@@ -1,262 +1,377 @@
-//
-// Lists, c++, Mohamad Alamin Yassin
-//
 #include <bits/stdc++.h>
 
 using namespace std;
 
-struct Product {
-    // Name of the Product
-	string name;
-	// Price of the Product
-	int price;
-	// Year of production
-	int year;
+//
+
+struct Player
+{
+
+    string playerName;
+
+    int playerAge;
+
+    int playerID;
+
 };
 
-struct node {
+struct Node
+{
 
-	Product data;
+    Player data;
 
-	node *next;
+    Node *next;
+
 };
-// All the functions are written inside this class
-class List {
 
-	node *head;
+class CircularList
+{
 
-	node *tail;
+    Node *head;
 
-	node *temp;
+    Node *tail;
 
-	int nodeNum = 0;
+    Node *temp;
 
-	bool isEmpty()
-	{
-		return head == NULL;
-	}
+    int nodeNum;
+
+    int id;
+
 public:
     // constructor
-	List()
-	{
-		head = NULL;
-		tail = NULL;
-	}
-	// This function is adding the product at the first of the list
-	void addAtFirst(Product p)
-	{
+    CircularList()
+    {
+        head = NULL;
+        tail = NULL;
+        nodeNum=0;
+        id=0;
+    }
 
-		temp = new node;
-		temp->data = p;
-		if (isEmpty())
-		{
-			temp->next = NULL;
-			tail = temp;
-		}
-		else
-			temp->next = head;
-		head = temp;
-		nodeNum++;
-	}
-	void addAtLast(Product p)
-	{
-		temp = new node;
-		temp->data = p;
-		temp->next = NULL;
-		if (isEmpty())
-		{
-			head = temp;
-			tail = temp;
-		}
-		else
-		{
-			tail->next = temp;
-			tail = temp;
-		}
-		nodeNum++;
-	}
-    // I'm using add before using only 2 pointers :D  "more efficient for memory"
-	void addBefore(Product p, Product pos)
-	{
-		if (isEmpty())
-		{
-			cout << "Logic error, the list is empty, please add some nodes before using this function"<<endl;
-		}
-		else if (nodeNum == 1)
-		{
-			addAtFirst(p);
-		}
-		else
-		{
-		    // initializing 2 pointers
-            node *prev;
-            node *after;
+    // This function is adding the Player at the first of the CircularList
+    void addAtFirst(Player p)
+    {
+
+        temp = new Node;
+
+        id++;
+        p.playerID=id;
+        temp->data = p;
+
+        if (isEmpty())
+        {
+            tail = temp;
+            temp->next=temp;
+        }
+        else
+        {
+            temp->next = head;
+            tail->next=temp;
+        }
+
+
+        head = temp;
+        nodeNum++;
+
+
+    }
+    void addAtLast(Player p)
+    {
+        temp = new Node;
+
+        id++;
+        p.playerID=id;
+        temp->data = p;
+
+        if (isEmpty())
+        {
+            head = temp;
+            tail = temp;
+        }
+        else
+        {
+            tail->next = temp;
+            tail = temp;
+        }
+        temp->next = head;
+        nodeNum++;
+    }
+    // I'm using add before using only 2 pointers instead of 3 :D  "more efficient for memory"
+    void addBefore(Player p, Player pos)
+    {
+        if (isEmpty())
+        {
+            cout << "Logic error, the CircularList is empty, please add some Nodes before using this function"<<endl;
+        }
+        // if we have only one node in our list
+        else if (nodeNum == 1)
+        {
+            addAtFirst(p);
+        }
+        else
+        {
+            // initializing 2 pointers
+            Node *prev;
+            Node *after;
             prev = head;
             after = head->next;
-		    if(prev->data.name==pos.name)
-		    {
-		        addAtFirst(p);
-		    }
+
+            //if we add before first position
+            if(prev->data.playerName==pos.playerName)
+            {
+                addAtFirst(p);
+            }
+
             else
             {
-                while (after->next != NULL && after->data.name != pos.name)
+                while (after->next != head && after->data.playerName != pos.playerName)
                 {
                     prev = after;
                     after = after->next;
                 }
-                if (after->data.name == pos.name)
+
+                if (after->data.playerName == pos.playerName)
                 {
-                    temp = new node;
+                    temp = new Node;
+                    id++;
+                    p.playerID=id;
                     temp->data = p;
                     temp->next = prev->next;
                     prev->next = temp;
-
                     nodeNum++;
                 }
+
                 else
                 {
-                    cout << "Error, couldn't find the desired position to insert the product!"<<endl;
+                    cout << "Error, couldn't find the desired position to insert the Player!"<<endl;
                 }
+
             }
 
-		}
-	}
-	void addAfter(Product p, Product pos)
-	{
-		if (isEmpty())
-		{
-			cout << "Logic error, the list is empty, please add some nodes before using this function";
-		}
-		else if (nodeNum == 1)
-		{
-			addAtLast(p);
-		}
-		else
-		{
+        }
+    }
+    void addAfter(Player p, Player pos)
+    {
 
-			node *prev = new node;
-			prev = head;
-			while (prev->next != NULL && prev->data.name != pos.name)
-			{
-				prev = prev->next;
-			}
-			if (prev->data.name == pos.name)
-			{
-			    temp = new node;
-			    temp->data=p;
-			    temp->next=prev->next;
-			    prev->next=temp;
-				nodeNum++;
-			}
-			else
-			{
-				cout << "Error, couldn't find the desired position to insert the product!\n";
-			}
-		}
-	}
-	void removeNode(Product p)
-	{
-		temp = head;
-		node *prev;
-		while (temp->next != NULL && temp->data.name != p.name)
-		{
-			prev = temp;
-			temp = temp->next;
-		}
-		if (temp->data.name == p.name)
-		{
-			if (nodeNum > 1)
-			{
-				prev->next = temp->next;
-				cout<<temp->data.name<<" has been deleted successfully "<<endl;
-				delete temp;
-			}
-			else
-			{
-				cout <<"Error, please add any node before deleteing";
-			}
-		}
-		else
-		{
-			cout << "couldn't find the desired node to delete";
-		}
-	}
+        if (isEmpty())
+        {
+            cout << "Logic error, the CircularList is empty, please add some Nodes before using this function";
+        }
+        // if we have only one node is our list
+        else if (nodeNum == 1)
+        {
+            addAtLast(p);
+        }
 
-    // This function is for printing the list
-	void display()
-	{
-		if (!isEmpty())
-		{
-			for (temp = head; temp != NULL; temp = temp->next)
-			{
-				cout <<"Product: " <<temp->data.name << " - ";
-				cout << temp->data.price << "$ - ";
-				cout << temp->data.year <<"  ";
-				cout <<"   ";
-			}
-			cout << endl<<endl;
-			cout << "The shop has: "<< nodeNum <<" Products"<<endl<<endl;
-		}
-		else
-		{
-			cout << "Error, the list is empty, please add some nodes before using this function";
-		}
-	}
+        else
+        {
+
+            Node *after = new Node;
+            after = head;
+
+            while (after->next != head && after->data.playerName != pos.playerName)
+            {
+                after = after->next;
+            }
+
+            if (after->data.playerName == pos.playerName)
+            {
+                temp = new Node;
+                id++;
+                p.playerID=id;
+                temp->data=p;
+                temp->next=after->next;
+                after->next=temp;
+                nodeNum++;
+
+            }
+            else
+            {
+                cout << "Error, couldn't find the desired position to insert the Player!\n";
+            }
+        }
+    }
+
+    bool isEmpty()
+    {
+        return head == NULL;
+    }
+
+    void removeNode(Player p)
+    {
+        temp = head;
+        Node *prev;
+        while (temp->next != head && temp->data.playerName != p.playerName)
+        {
+            prev = temp;
+            temp = temp->next;
+        }
+        if (temp->data.playerName == p.playerName)
+        {
+            if (nodeNum > 1)
+            {
+                prev->next = temp->next;
+                cout<<temp->data.playerName<<" has been deleted successfully "<<endl;
+                delete temp;
+            }
+            else
+            {
+                cout <<"Error, please add any Node before deleteing";
+            }
+        }
+        else
+        {
+            cout << "couldn't find the desired Node to delete";
+        }
+    }
+
+    // This function is for printing the CircularList
+    void circularDisplay()
+    {
+
+        if (!isEmpty())
+        {
+            cout << "The Game has: "<< nodeNum <<" Players"<<endl<<endl;
+            for (temp = head; temp->next != head; temp = temp->next)
+            {
+                cout <<"\nPlayer ID: "<<temp->data.playerID<<endl;
+                cout <<"Player name is: " <<temp->data.playerName<<" and his age is: "<<temp->data.playerAge<<endl;
+
+            }
+            cout <<"\nPlayer ID: "<<temp->data.playerID<<endl;
+            cout <<"Player name is: " <<temp->data.playerName<<" and his age is: "<<temp->data.playerAge<<endl;
+            cout<<endl;
+
+        }
+        else
+        {
+            cout << "Error, the CircularList is empty, please add some Nodes before using this function\n";
+        }
+    }
+    void starDisplay()
+    {
+        if(!isEmpty())
+        {
+            if(nodeNum%2==0)
+            {
+                for (temp = head; temp->next != head; temp = temp->next)
+                    if(temp->data.playerID%2==0)
+                    {
+                        cout <<"\nPlayer ID: "<<temp->data.playerID<<endl;
+                        cout <<"Player name is: " <<temp->data.playerName<<" and his age is: "<<temp->data.playerAge<<endl;
+                    }
+                for (temp = head; temp->next != head; temp = temp->next)
+                    if(temp->data.playerID%2!=0)
+                    {
+                        cout <<"\nPlayer ID: "<<temp->data.playerID<<endl;
+                        cout <<"Player name is: " <<temp->data.playerName<<" and his age is: "<<temp->data.playerAge<<endl;
+                    }
+            }
+            else
+            {
+                temp=head;
+                for(int i=0;i<nodeNum+1;i++)
+                {
+                    cout <<"\nPlayer ID: "<<temp->data.playerID<<endl;
+                    cout <<"Player name is: " <<temp->data.playerName<<" and his age is: "<<temp->data.playerAge<<endl;
+                    temp=temp->next;
+                    temp=temp->next;
+                }
+            }
+        }
+
+
+    }
 };
+
+void menu()
+{
+    cout<<"Please enter 1 to add first of the CircularList.\n";
+    cout<<"Please enter 2 to add at last of the CircularList.\n";
+    cout<<"Please enter 3 to add before of the CircularList.\n";
+    cout<<"Please enter 4 to add after of the CircularList.\n";
+    cout<<"Please enter 5 to remove.\n";
+    cout<<"Please enter 6 to circularDisplay the CircularList.\n";
+    cout<<"Please enter 7 to check if the CircularList is empty or not.\n";
+    cout<<"Please enter 8 to clear out the screen.\n";
+    cout<<"Please enter 9 to use starDisplay.\n";
+    cout<<"Please enter 0 to exit the program.\n";
+}
+
 
 int main()
 {
-	List l;
-	Product pro, pr, prod, p1, p2, p3, p4, p5, p6;
+    CircularList l;
+    Player player1,player2;
+    int option;
+    cout<<"Welcome to our CircularList program.\n";
+    do
+    {
+        menu();
+        cin>>option;
+        switch(option)
+        {
+            case 1:
+                cout<<"Enter the name of the player please: \n";
+                cin>>player1.playerName;
+                cout<<"Enter the age of the player please: \n";
+                cin>>player1.playerAge;
+                l.addAtFirst(player1);
+                break;
 
-	pr.name = "Woods";
-	pr.price = 2;
-	pr.year=1998;
-	l.addAtFirst(pr);
+            case 2:
+                cout<<"Enter the Name of the player please: \n";
+                cin>>player1.playerName;
+                cout<<"Enter the age of the player please: \n";
+                cin>>player1.playerAge;
+                l.addAtLast(player1);
+                break;
 
+            case 3:
+                cout<<"Enter the the name of the player please: \n";
+                cin>>player1.playerName;
+                cout<<"Enter the age of the player please: \n";
+                cin>>player1.playerAge;
+                cout<<"Please enter the name of the player that you want to add this player before \n";
+                cin>>player2.playerName;
+                l.addBefore(player1,player2);
+                break;
 
-	pro.name = "Oil";
-	pro.price = 20;
-	pro.year=2016;
-	l.addAtFirst(pro);
+            case 4:
+                cout<<"Enter the name of the player please: \n";
+                cin>>player1.playerName;
+                cout<<"Enter the age of the player please: \n";
+                cin>>player1.playerAge;
+                cout<<"Please enter the name of the player that you want to add this player after \n";
+                cin>>player2.playerName;
+                l.addAfter(player1,player2);
+                break;
 
+            case 5:
+                cout<<"Enter the name of the player that you want to remove please: \n";
+                cin>>player2.playerName;
+                l.removeNode(player2);
+                break;
 
-	prod.name = "Pancakes";
-	prod.price = 3;
-	prod.year=2021;
-	l.addAtLast(prod);
+            case 6:
+                l.circularDisplay();
+                break;
 
-	p2.name = "Butter";
-	p2.price = 5;
-	p2.year=2020;
-	l.addAtLast(p2);
+            case 7:
+                l.isEmpty();
+                break;
 
-	p3.name = "Meat";
-	p3.price = 7;
-	p3.year=2021;
-	l.addAtLast(p3);
+            case 8:
+                system("cls");
+                break;
+            case 9:
+                l.starDisplay();
+                break;
+            default:
+                cout<<"You didn't choose a proper output, please try again\n";
 
-	p4.name = "Cheese";
-	p4.price = 3;
-	p4.year=2020;
-	l.addAtLast(p4);
-	l.display();
+        }
+    }
+    while(option!=0);
 
-	p1.name = "Kefir";
-	p1.price = 2;
-	p1.year=2021;
-	l.addAfter(p1, p4);
-
-	p6.name = "Ice cream";
-	p6.price = 1;
-	p6.year=1000;
-
-	l.addBefore(p6, pro);
-
-
-
-
-	l.display();
-
-	return 0;
+    return 0;
 }
