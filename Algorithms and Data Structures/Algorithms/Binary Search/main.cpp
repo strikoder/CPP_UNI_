@@ -4,7 +4,7 @@
 #include <math.h>
 using namespace std;
 
-int binarySearch( const vector <int>& vect, int value)
+int binarySearch(const vector <int>& vect, int value)
 {
     // Enhanced algorithm of binary search
     int pointer=(vect.size()/2)+vect.size()%2;
