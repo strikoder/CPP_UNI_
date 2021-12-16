@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1639658985 source:k:\github\c++_projects\algorithms and data structures\algorithms\binary search\main.cpp
+	<iostream>
+	<vector>
+	<algorithm>
+	<math.h>
+
