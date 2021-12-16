@@ -229,6 +229,8 @@ void CircularList::starDisplay()
                     cout <<"\nPlayer ID: "<<temp->data.playerID<<endl;
                     cout <<"Player name is: " <<temp->data.playerName<<" and his age is: "<<temp->data.playerAge<<endl;
                 }
+            cout <<"\nPlayer ID: "<<temp->data.playerID<<endl;
+            cout <<"Player name is: " <<temp->data.playerName<<" and his age is: "<<temp->data.playerAge<<endl;
         }
         else
         {
