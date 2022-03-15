@@ -26,7 +26,7 @@ int binarySearch(const vector <int>& vect, int value)
 
     // Normal algorithm of binary search
     /*
-    while(pointer>=0&&pointer<=vect.size())
+    while(left<=right)
     {
         mid=left+(right-left)/2;
         if(vect[mid]==value)
