@@ -6,27 +6,10 @@ using namespace std;
 
 int binarySearch(const vector <int>& vect, int value)
 {
-    // Enhanced algorithm of binary search
-    int pointer=(vect.size()/2)+vect.size()%2;
-    while(pointer>=0&&pointer<=vect.size())
-    {
+    int left=0,right,mid;
+    right=vect.size();
 
-        if(vect[pointer-1]==value)
-            return pointer-1;
-        else if(vect[pointer-1]<value)
-        {
-            pointer+=pointer/2;
-        }
-        else
-        {
-            pointer-=pointer/2;
-        }
-    }
-    return -1;
-
-    // Normal algorithm of binary search
-    /*
-    while(pointer>=0&&pointer<=vect.size())
+    while(left<=right)
     {
         mid=left+(right-left)/2;
         if(vect[mid]==value)
@@ -37,7 +20,31 @@ int binarySearch(const vector <int>& vect, int value)
             right=mid-1;
     }
     return -1;
+
+    /*
+    int pointer=(vect.size()/2)+vect.size()%2;
+
+    while(pointer/2!=1)
+    {
+
+        if(vect[pointer-1]==value)
+            break;
+        else if(vect[pointer-1]<value)
+        {
+            pointer+=pointer/2;
+        }
+        else
+        {
+            pointer-=pointer/2;
+        }
+    }
+    if(vect[pointer-1]==value)
+    {
+        return value;
+    }
+    return -1;
     */
+
 
 }
 
