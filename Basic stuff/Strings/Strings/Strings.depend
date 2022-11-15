@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1640535561 source:k:\github\c++_projects\strings\strings\main.cpp
+	<bits/stdc++.h>
+	"header.h"
+
+1640534507 k:\github\c++_projects\strings\strings\header.h
+	<bits/stdc++.h>
+
+1640535397 source:k:\github\c++_projects\strings\strings\implementation.cpp
+	<bits/stdc++.h>
+	"header.h"
+
+1640535622 source:k:\github\c++\strings\strings\main.cpp
+	<bits/stdc++.h>
+	"header.h"
+
+1640534507 k:\github\c++\strings\strings\header.h
+	<bits/stdc++.h>
+
