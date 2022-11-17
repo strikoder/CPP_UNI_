@@ -1,2 +1,2 @@
-# These are my C++ projects
+# C++ projects
  
